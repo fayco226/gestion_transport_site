@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  
+  <!-- Listings -->
+  {% if '/car/' == request.path %}
+    <a href ="{% url 'addCar' %}" class="btn btn-warning"> Ajouter Car</a>
+    
+
+    {% if models %}
+            <div class="container-fluid py-4">
+                <div class="row">
+                <div class="col-12">
+                    <div class="card mb-4">
+                    <div class="card-header pb-0">
+                        <h6>Cars table</h6>
+                    </div>
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                            <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">nom</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nombre de places</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Capacite bagage</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nombre de car du meme type</th>
+                                <th class="text-secondary opacity-7"></th>
+                            </tr>
+                            </thead>
+                            
+                            
+                            <tbody>
+                                
+                                {% for model in models %}
+                            <tr>
+                                <td>
+                                <div class="d-flex px-2 py-1">
+                                    <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-sm">{{model.id}}</h6>
+                                    
+                                    </div>
+                                </div>
+                                </td>
+                                <td>
+                                <p class="text-xs font-weight-bold mb-0">{{model.nom}}   </p>
+                                
+                                </td>
+                                
+
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">{{model.nombre_de_places}}</p>
+                                    
+                                </td>
+                                    <td>
+                                    <p class="text-xs font-weight-bold mb-0">{{model.capacite_bagage}}</p>
+                                                    
+                                    </td>
+                                    <td>
+                                      <p class="text-xs font-weight-bold mb-0">{{model.nombre_de_car}}</p>
+                                                      
+                                      </td>
+                                  
+                                
+                                
+                                <td class="align-middle">
+                                <a href="{% url 'editCar' model.id %}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                    Edit
+                                </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                        </table>
+                        {% else %}
+              <div class="col-md-12">
+                <p>pas de car trouver</p>
+              </div>
+            {% endif %}
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-12">
+                      {% if models.has_other_pages %}
+                        <ul class="pagination">
+                          {% if models.has_previous %}
+                            <li class="page-item">
+                              <a href="?page={{ models.previous_page_number }}" class="page-link">&laquo;</a>
+                            </li>
+                          {% else %}
+                            <li class="page-item disabled">
+                              <a class="page-link">&laquo;</a>
+                            </li>
+                          {% endif %}
+              
+                          {% for i in models.paginator.page_range %}
+                            {% if models.number == i %}
+                              <li class="page-item active">
+                                <a class="page-link">{{i}}</a>
+                              </li>
+                            {% else %}
+                              <li class="page-item">
+                                <a href="?page={{i}}" class="page-link">{{i}}</a>
+                              </li>
+                            {% endif %}
+                          {% endfor %}
+              
+              
+                          {% if models.has_next %}
+                            <li class="page-item">
+                              <a href="?page={{ models.next_page_number }}" class="page-link">&raquo;</a>
+                            </li>
+                          {% else %}
+                            <li class="page-item disabled">
+                              <a class="page-link">&raquo;</a>
+                            </li>
+                          {% endif %}
+                        </ul>
+                      {% endif %}
+                    </div>
+                  </div>
+
+            </div>
+          
+{% else %}
+
+<div class="container">
+    <div class="row ">
+      <div class="col-xl-6 col-lg-15 col-md-9 mx-auto">
+        <div class="card z-index-0">
+          <div class="card-header text-center pt-4">
+            <h5>{% if 'edit' in request.path %} Editer Car {% else %}  Ajouter Car {% endif %}</h5>
+          </div>
+          <div class="card-body">
+            <form role="form text-left" method="POST">
+              {% csrf_token %}
+              {{ form.as_p }}
+              
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Save</button>
+              </div>
+              
+            </form>
+            {% if 'edit' in request.path %}<a href="{% url 'deleteCar' id %}" class="btn btn-danger"> Delete</a>{% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  </div>
+    {% endif %}
+{% endblock content %}
