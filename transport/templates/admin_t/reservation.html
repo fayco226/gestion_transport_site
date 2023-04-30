@@ -4,7 +4,7 @@
   <p class="bg-success" > {{message.tags}} </p>
   <!-- Listings -->
   {% if 'reservation' in request.path %}
-    <a href ="{% url 'addReservation' %}" class="btn btn-warning"> Add Reservation </a>
+    <a href ="{% url 'addReservation' %}" class="btn btn-warning"> AJouter une Reservation </a>
     
 
       {% if models %}
@@ -23,7 +23,9 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Client</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Voyage</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Pour</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Date de Reservation</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Validation</th>
                                 
                                 <th class="text-secondary opacity-7"></th>
                             </tr>
@@ -52,14 +54,28 @@
                                                     
                                     </td>
                                     <td>
+                                      <p class="text-xs font-weight-bold mb-0"> {% if model.NomEtPrenom == 'user' %} {{model.client}}  {% else %} {{model.NomEtPrenom}} {% endif %} </p>
+                                                      
+                                      </td>
+
+                                    <td>
                                       <p class="text-xs font-weight-bold mb-0">{{model.date}}</p>
                                                       
                                       </td>
                                 
-                                
+                                      <td class="align-middle">
+                                        {% if not model.valider_reservation %}
+                                        <a href=" {% url 'validerReservation' model.id %} " class="btn btn-success" data-toggle="tooltip" data-original-title="Edit user">
+                                            valider?
+                                        </a>
+                                        {% else %}
+
+                                        <p class="text-success">reservation valider</p>
+                                        {% endif %}
+                                        </td>
                                 
                                 <td class="align-middle">
-                                <a href=" {% url 'editReservation' model.id %} " class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                <a href=" {% url 'editReservation' model.id %} " class="btn btn-info" data-toggle="tooltip" data-original-title="Edit user">
                                     Edit
                                 </a>
                                 </td>

@@ -8,7 +8,7 @@ class Client (models.Model):
     nom = models.CharField( max_length=50)
     prenom = models.CharField(max_length=100)
     addresse = models.CharField(max_length=100)
-    nomUtisateur = models.CharField(max_length=50, default='user')
+    nomUtisateur = models.CharField(max_length=50, default='user', unique=True)
     email = models.EmailField(max_length=254, default='example@example.com')
     telephone = PhoneNumberField(default='+22661748597')
     cnib = models.IntegerField()
@@ -59,10 +59,13 @@ class Voyages(models.Model):
 class Reservation(models.Model):
     client = models.ForeignKey(Client,on_delete=models.CASCADE)
     voyage = models.ForeignKey(Voyages,on_delete=models.CASCADE)
-    date = models.DateField(auto_now=False, auto_now_add=False)
+    NomEtPrenom = models.CharField(max_length=100, default="user")
+    date = models.DateField(auto_now=False, auto_now_add=False,)
+    valider_reservation = models.BooleanField(default=False)
     
     
-        
+    class Meta:
+        ordering = ['valider_reservation','-date']
         
     
     def __str__(self):
@@ -101,6 +104,7 @@ class Reserve(models.Model):
         return self.villeDepart + ' - ' + self.villeArrive
 
 
+
   
 @receiver(post_save, sender=Reservation)
 def misAjourPlace(sender, instance,**kwargs):
@@ -137,12 +141,23 @@ class Courier(models.Model):
     objetAEnvoyer = models.CharField( max_length=50)
     prixDeLobjet = models.IntegerField()
     telephone = models.CharField( max_length=50)
-    Cnib = models.IntegerField()
+    cnib = models.IntegerField()
+    validerArrive = models.BooleanField(default=False)
+    validerPris = models.BooleanField(default=False)
+    
+    class Meta:
+        ordering=['validerArrive','validerPris']
 
    
     def __str__(self):
-        return self.nomEtDeExpediteur +'-'+self.nomDuDestinatair
+        return self.nomEtPrenomDeExpediteur +'-'+self.nomEtPrenomDuDestinatair
+    
 
     
+
+class UtlisateurConnecter(models.Model):
+    identifiant = models.IntegerField()
+
+
 
     

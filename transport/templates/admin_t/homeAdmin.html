@@ -3,17 +3,79 @@
 {% block content %}
 
 
-<p class='well'> <span class="ms-1 font-weight-bold" > Bienvenu Sur le Tableau de Bord Admin  </span></p> <br/><br/><br/><br/>
+<p class='well'> <span class="ms-1 font-weight-bold" > Bienvenu Sur le Tableau de Bord Admin  </span></p> <br/>
 
 <div class="row">
 
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+
+    <div class="col-xl-6 p-5">
       <div class="card">
-        <div class="card-body p-3">
+        <div class="card-body p-5">
           <div class="row">
             <div class="col-8">
               <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Client</p>
+                <p class="text-sm mb-0 text-capitalize font-weight-bold"><h3 class="font-weight-bolder mb-0">Reservation</h3></p>
+              
+                <h6 class="font-weight-bolder mb-0">
+                    <u>Non valider</u> : <span class="text-info">{{ nombreReservation }} </span></br>
+                    <u>Total</u> :<span class="text-info"> {{reservationtotal}}</span>
+                  <span class="text-warning text-sm font-weight-bolder">+5%</span>
+                </h6>
+              
+              </div>
+            </div>
+            <div class="col-4 text-end">
+              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4 p-5">
+      <div class="card">
+        <div class="card-body p-5">
+          <div class="row">
+            <div class="col-8">
+              <div class="numbers">
+                <p class="text-sm mb-0 text-capitalize font-weight-bold"><h3 class="font-weight-bolder mb-0">Courier</h3></p>
+                <h6 class="font-weight-bolder mb-0">
+                  <table>
+                    <tr>
+                      <td> <u>Non valider</u>:&nbsp; <span class="text-info"> {{ nombreCourier }} </span>&nbsp;&nbsp;</td>
+                      <td><u>Arriver</u> : &nbsp;&nbsp;<span class="text-info">{{courierArriver}}</span> </td>
+
+                    </tr>
+                    <tr>
+                    <td> <u>Pris</u> : &nbsp;&nbsp;<span class="text-info">{{courierPris}}</span> </td>
+                    <td> <u>Total</u> : &nbsp;&nbsp;<span class="text-info">{{couriertotal}}</span>
+                    <span class="text-warning text-sm font-weight-bolder">+3%</span> </td>
+                    </tr>
+                  </table>
+                </h6>
+              </div>
+            </div>
+            <div class="col-4 text-end">
+              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+
+    <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4 p-5">
+      <div class="card">
+        <div class="card-body p-5">
+          <div class="row">
+            <div class="col-8">
+              <div class="numbers">
+                <p class="text-sm mb-0 text-capitalize font-weight-bold"><h3 class="font-weight-bolder mb-0">Client</h3></p>
                 <h5 class="font-weight-bolder mb-0">
                   {{ nombreClient }}
                   <span class="text-success text-sm font-weight-bolder">+55%</span>
@@ -29,35 +91,14 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+
+    <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4 p-5">
       <div class="card">
-        <div class="card-body p-3">
+        <div class="card-body p-5">
           <div class="row">
             <div class="col-8">
               <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Car</p>
-                <h5 class="font-weight-bolder mb-0">
-                  {{ nombreCar }}
-                  <span class="text-success text-sm font-weight-bolder">+3%</span>
-                </h5>
-              </div>
-            </div>
-            <div class="col-4 text-end">
-              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
-        <div class="card-body p-3">
-          <div class="row">
-            <div class="col-8">
-              <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Voyages</p>
+                <p class="text-sm mb-0 text-capitalize font-weight-bold"><h3 class="font-weight-bolder mb-0">Voyages</h3></p>
                 <h5 class="font-weight-bolder mb-0">
                   {{ nombreVoyages }}
                   <span class="text-danger text-sm font-weight-bolder">-2%</span>
@@ -73,34 +114,13 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-3 col-sm-6">
-      <div class="card">
-        <div class="card-body p-3">
-          <div class="row">
-            <div class="col-8">
-              <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Reservation</p>
-                <h5 class="font-weight-bolder mb-0">
-                    {{ nombreReservation }}
-                  <span class="text-success text-sm font-weight-bolder">+5%</span>
-                </h5>
-              </div>
-            </div>
-            <div class="col-4 text-end">
-              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
   </div>
 
   <table>
     {% for model in models %}
-    
+
     {% endfor %}
 </table>
-  
+
 {% endblock content %}

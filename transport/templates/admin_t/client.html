@@ -3,7 +3,7 @@
 {% block content %}
 
 {% if '/client/' in request.path %}
-    <a href ="{% url 'addClient' %}" class="btn btn-warning"> Add Client </a>
+    <a href ="{% url 'addClient' %}" class="btn btn-warning"> Ajouter Client </a>
     
 
       {% if models %}
@@ -73,7 +73,7 @@
                                 
                                 
                                 <td class="align-middle">
-                                <a href="{% url 'editClient' model.id %}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                <a href="{% url 'editClient' model.id %}" class="btn btn-info" data-toggle="tooltip" data-original-title="Edit user">
                                     Edit
                                 </a>
                                 </td>
